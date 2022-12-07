@@ -1,4 +1,3 @@
-
 class FS:
     def __init__(self):
         self._root = Dir("/")
@@ -71,7 +70,6 @@ class FakeFile:
         return "file: " + self._name + ", size: " + str(self._size)
 
 def main():
-    
     with open("input.txt", "r") as f:
         lines = f.readlines()
 
@@ -101,11 +99,13 @@ def main():
                 else:
                     fs.add_child_to_curr(arg.split(" ")[1], "file", int(arg.split(" ")[0]))
 
+    # PART 1
     # print(fs._existing_dirs)
-    print(sum(fs.compute_sizes_below_thresholds(100000)))
+    print(f"Sum of sizes of directories below the given threshold: {sum(fs.compute_sizes_below_thresholds(100000))}")
 
+    # PART 2
     print(f"Total space used: {fs.compute_total_size()}/70000000")
-    print(f"Sizes of directories that would free up enough space: {fs.compute_sizes_above_thresholds(fs.compute_total_size() - 40000000)}")
+    print(f"Minimum that would free up enough space: {min(fs.compute_sizes_above_thresholds(fs.compute_total_size() - 40000000))}")
 
 if __name__ == "__main__":
     main()
